@@ -1,9 +1,9 @@
-name             'bjn_logstash'
-version          "#{raise}.#{raise}.#{raise}"
-description      raise
-long_description raise
-maintainer       "#{raise} / Blue Jeans Network"
-maintainer_email "#{raise}@bluejeans.com"
+name             "bjn_logstash"
+version          File.read(File.join(File.dirname(__FILE__), "VERSION")).strip
+description      "Install and configure Logstash"
+long_description "Install and configure Logstash"
+maintainer       "Sean Clemmer / Blue Jeans Network"
+maintainer_email "sclemmer@bluejeans.com"
 
 # Depends
 
