@@ -7,8 +7,6 @@
 
 include_recipe 'runit'
 
-directory node['logstash']['logs']
-
 group node['logstash']['user']
 
 user node['logstash']['user'] do
@@ -17,6 +15,11 @@ user node['logstash']['user'] do
   comment 'logstash'
   shell '/bin/false'
   system true
+end
+
+directory node['logstash']['logs'] do
+  owner node['logstash']['user']
+  group node['logstash']['user']
 end
 
 ark 'logstash' do
