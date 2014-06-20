@@ -1,0 +1,22 @@
+---
+driver_plugin: vagrant
+driver_config:
+  require_chef_omnibus: true
+
+platforms:
+  - name: ubuntu-12.04
+    driver_config:
+      box: chef/ubuntu-12.04
+
+suites:
+  - name: default
+    run_list:
+      - recipe[apt]
+      - recipe[java]
+      - recipe[bjn_logstash]
+    attributes:
+      java:
+        jdk_version: 7
+        install_flavor: openjdk
+        openjdk_packages:
+          - openjdk-7-jdk

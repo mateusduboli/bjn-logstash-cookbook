@@ -1,1 +1,11 @@
-# bjn_logstash
+default['logstash']['version']   = '1.4.1'
+default['logstash']['checksum']  = 'a1db8eda3d8bf441430066c384578386601ae308ccabf5d723df33cee27304b4'
+default['logstash']['url']       = "https://download.elasticsearch.org/logstash/logstash/logstash-#{node['logstash']['version']}.tar.gz"
+default['logstash']['debug?']    = false
+default['logstash']['user']      = 'logstash'
+default['logstash']['home']      = '/opt/logstash'
+default['logstash']['logs']      = '/var/log/logstash'
+default['logstash']['conf']      = '/etc/logstash/logstash.conf'
+default['logstash']['agents']    = 1
+default['logstash']['workers']   = 1
+default['logstash']['heap_size'] = nil

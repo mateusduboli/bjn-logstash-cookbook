@@ -5,8 +5,5 @@ long_description "Install and configure Logstash"
 maintainer       "Sean Clemmer / Blue Jeans Network"
 maintainer_email "sclemmer@bluejeans.com"
 
-# Depends
-
-# Attributes
-
-# Recipes
+depends 'ark'
+depends 'runit'

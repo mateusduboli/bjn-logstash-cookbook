@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+#
+# "multiply NUM_TIMES QUOTED_CMD" will execute QUOTED_CMD NUM_TIMES in parallel
+#
+
+id=$(date +%s)
+tmp="/tmp/startup-$id"
+touch $tmp
+
+cleanup() {
+  trap SIGTERM
+  while read -r pid ; do
+    echo "Killing process #$pid" 2>&1
+    kill -9 $pid
+  done < $tmp
+  rm $tmp
+  exit
+}
+
+trap 'cleanup' TERM
+
+for i in $(seq 1 $1) ; do
+  echo -n "Running '$2' ($i)..." 2>&1
+  exec $2 &
+  echo $! >> $tmp
+  echo " started process #$!" 2>&1
+done
+wait
+
+cleanup()
