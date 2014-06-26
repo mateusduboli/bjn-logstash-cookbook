@@ -1,5 +1,4 @@
 source 'https://api.berkshelf.com'
 metadata
-
 cookbook 'apt'
-cookbook 'java'
+cookbook 'bjn_java', path: '../../helpers/bjn_java'

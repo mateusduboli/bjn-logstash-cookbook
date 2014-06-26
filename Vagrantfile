@@ -12,16 +12,9 @@ Vagrant.configure('2') do |config|
     node.vm.network :forwarded_port, guest: 9300, host: 9300
     node.vm.provision :chef_solo do |chef|
       chef.log_level = :debug
-      chef.json = {
-        java: {
-          jdk_version: 7,
-          install_flavor: 'openjdk',
-          openjdk_packages: %w[ openjdk-7-jdk ]
-        }
-      }
+      chef.json = {}
       chef.run_list = %w(
         recipe[apt]
-        recipe[java]
         recipe[bjn_logstash]
       )
     end
