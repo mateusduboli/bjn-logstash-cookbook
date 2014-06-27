@@ -1,0 +1,21 @@
+input {
+  generator {
+    count => 100
+  }
+}
+
+# Uses both our custom filters: seq and scan
+filter {
+  seq { }
+
+  scan {
+    target => 'numbers'
+    match => [ '@seq', '\d+' ]
+  }
+}
+
+output {
+  stdout {
+    codec => rubydebug
+  }
+}

@@ -13,4 +13,5 @@ suites:
     run_list:
       - recipe[apt]
       - recipe[bjn_logstash]
+      - recipe[bjn_logstash::test]
     attributes: {}

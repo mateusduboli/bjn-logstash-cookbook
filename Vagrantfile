@@ -16,6 +16,7 @@ Vagrant.configure('2') do |config|
       chef.run_list = %w(
         recipe[apt]
         recipe[bjn_logstash]
+        recipe[bjn_logstash::test]
       )
     end
   end

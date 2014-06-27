@@ -38,6 +38,16 @@ cookbook_file 'multiply' do
   mode 0755
 end
 
+cookbook_file 'filter_scan.rb' do
+  path "#{node['logstash']['home']}/lib/logstash/filters/scan.rb"
+  backup false
+end
+
+cookbook_file 'filter_seq.rb' do
+  path "#{node['logstash']['home']}/lib/logstash/filters/seq.rb"
+  backup false
+end
+
 runit_service 'logstash' do
   owner node['logstash']['user']
   group node['logstash']['user']
