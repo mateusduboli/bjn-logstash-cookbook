@@ -30,22 +30,27 @@ ark 'logstash' do
   version node['logstash']['version']
   home_dir node['logstash']['home']
   owner node['logstash']['user']
+  group node['logstash']['user']
+  notifies :restart, 'service[logstash]', :delayed
 end
 
 cookbook_file 'multiply' do
   path "#{node['logstash']['home']}/bin/multiply"
   backup false
   mode 0755
+  notifies :restart, 'service[logstash]', :delayed
 end
 
 cookbook_file 'filter_scan.rb' do
   path "#{node['logstash']['home']}/lib/logstash/filters/scan.rb"
   backup false
+  notifies :restart, 'service[logstash]', :delayed
 end
 
 cookbook_file 'filter_seq.rb' do
   path "#{node['logstash']['home']}/lib/logstash/filters/seq.rb"
   backup false
+  notifies :restart, 'service[logstash]', :delayed
 end
 
 runit_service 'logstash' do
