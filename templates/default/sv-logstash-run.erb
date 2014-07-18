@@ -1,6 +1,5 @@
 #!/bin/sh
-# Need to set LOGSTASH_HOME and HOME so sincedb will work
-export LOGSTASH_HOME="<%= node['logstash']['home'] %>"
+export LOGSTASH_HOME="<%= node['logstash']['home'] %>" # Required for SinceDB
 export LOGSTASH_LOGS="<%= node['logstash']['logs'] %>"
 export LOGSTASH_OPTS="agent -f <%= node['logstash']['conf'] %>"
 export LOGSTASH_OPTS="$LOGSTASH_OPTS -l $LOGSTASH_LOGS/logstash.log"
@@ -8,7 +7,7 @@ export LOGSTASH_OPTS="$LOGSTASH_OPTS -w <%= node['logstash']['workers'] %>"
 <% if node['logstash']['debug?'] %>
 export LOGSTASH_OPTS="$LOGSTASH_OPTS --debug --verbose"
 <% end %>
-export HOME="$LOGSTASH_HOME"
+export HOME="$LOGSTASH_HOME" # Again, for SinceDB
 export USE_JRUBY=1
 <% if node['logstash']['heap_size'] %>
 export LS_HEAP_SIZE="<%= node['logstash']['heap_size'] %>"
@@ -16,4 +15,7 @@ export LS_HEAP_SIZE="<%= node['logstash']['heap_size'] %>"
 exec 2>&1
 cd $LOGSTASH_HOME # Necessary for logstash to work properly
 CMD="$LOGSTASH_HOME/bin/logstash $LOGSTASH_OPTS"
-exec chpst -u <%= node['logstash']['user'] %> $LOGSTASH_HOME/bin/multiply <%= node['logstash']['agents'] %> "$CMD" 2>&1
+exec chpst -u <%= node['logstash']['user'] %> \
+  $LOGSTASH_HOME/bin/multiply                 \
+    <%= node['logstash']['logs'] %> logstash  \
+    <%= node['logstash']['agents'] %> "$CMD" 2>&1

@@ -1,30 +1,32 @@
 #!/usr/bin/env bash
 #
-# "multiply NUM_TIMES QUOTED_CMD" will execute QUOTED_CMD NUM_TIMES in parallel
+# "multiply TMP_DIR APP_NAME NUM_TIMES QUOTED_CMD" will execute QUOTED_CMD NUM_TIMES in parallel
 #
 
-id=$(date +%s)
-tmp="/tmp/startup-$id"
-touch $tmp
+tmp_dir="$1"
+app_name="$2"
+num_times="$3"
+quoted_cmd="$4"
 
 cleanup() {
   trap SIGTERM
   while read -r pid ; do
-    echo "Killing process #$pid" 2>&1
+    echo "Killing process #$pid" 1>&2
     kill -9 $pid
-  done < $tmp
-  rm $tmp
+  done < "$tmp_dir/$app_name.*.pid"
+  rm "$tmp_dir/$app_name*.pid"
   exit
 }
 
 trap 'cleanup' TERM
 
-for i in $(seq 1 $1) ; do
-  echo -n "Running '$2' ($i)..." 2>&1
-  exec $2 &
-  echo $! >> $tmp
-  echo " started process #$!" 2>&1
+for i in "$(seq 1 $num_times)" ; do
+  echo -n "Running '$app_name' ($i)..." 1>&2
+  exec $quoted_cmd &
+  echo "$!" > "$tmp_dir/$app_name.$i.pid"
+  echo " started process #$!" 1>&2
 done
+echo "$$" > "$tmp_dir/$app_name.pid"
 wait
 
 cleanup()
