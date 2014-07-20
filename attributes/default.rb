@@ -1,6 +1,6 @@
 default['logstash']['version']   = '1.4.2'
 default['logstash']['checksum']  = 'd5be171af8d4ca966a0c731fc34f5deeee9d7631319e3660d1df99e43c5f8069'
-default['logstash']['url']       = "https://download.elasticsearch.org/logstash/logstash/logstash-#{node['logstash']['version']}.tar.gz"
+default['logstash']['url']       = "https://download.elasticsearch.org/logstash/logstash/logstash-%{version}.tar.gz"
 default['logstash']['debug?']    = false
 default['logstash']['user']      = 'logstash'
 default['logstash']['home']      = '/opt/logstash'
