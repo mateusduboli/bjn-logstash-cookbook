@@ -7,8 +7,6 @@
 
 include_recipe 'bjn_essentials'
 
-logstash_url = node.materialize 'logstash', 'url'
-
 include_recipe 'bjn_java'
 
 include_recipe 'runit'
@@ -29,7 +27,7 @@ directory node['logstash']['logs'] do
 end
 
 ark 'logstash' do
-  url logstash_url
+  url node['logstash']['url']
   checksum node['logstash']['checksum']
   version node['logstash']['version']
   home_dir node['logstash']['home']
