@@ -33,3 +33,31 @@ default['logstash']['workers'] = 1
 
 # Configure a default JVM heap size value
 default['logstash']['heap_size'] = nil
+
+# Configure logstash inputs
+default['logstash']['input'] = {
+  'file' => {
+    'type'  => 'logstash',
+    'path'  => File.join(node['logstash']['logs'], 'logstash.log'),
+    'codec' => 'json'
+  }
+}
+
+# Configure logstash filters
+default['logstash']['filter'] = {
+  'date' => {
+    'match' => [ 'timestamp', 'ISO8601' ]
+  },
+  'seq' => {},
+  'scan' => {
+    'target' => 'digits',
+    'match' => [ 'message', /\b\d+\b/ ]
+  }
+}
+
+# Configure logstash outputs
+default['logstash']['output'] = {
+  'file' => {
+    'path' => File.join(node['logstash']['logs'], 'logstash.out')
+  }
+}

@@ -1,0 +1,31 @@
+input {
+
+<%- node['logstash']['input'].each do |name, config| -%>
+  <%= name %> {<%- config.each do |k, v| -%>
+    <%= k %> => <%= quote_logstash v %><%- end -%>
+  }
+
+<%- end -%>
+}
+
+
+filter {
+
+<%- node['logstash']['filter'].each do |name, config| -%>
+  <%= name %> {<%= "\n" if config.keys.empty? %><%- config.each do |k, v| -%>
+    <%= k %> => <%= quote_logstash v %><%- end -%>
+  }
+
+<%- end -%>
+}
+
+
+output {
+
+<%- node['logstash']['output'].each do |name, config| -%>
+  <%= name %> {<%- config.each do |k, v| -%>
+    <%= k %> => <%= quote_logstash v %><%- end -%>
+  }
+
+<%- end -%>
+}

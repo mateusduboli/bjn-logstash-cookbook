@@ -11,12 +11,11 @@ Vagrant.configure('2') do |config|
     node.vm.network :forwarded_port, guest: 9200, host: 9200
     node.vm.network :forwarded_port, guest: 9300, host: 9300
     node.vm.provision :chef_solo do |chef|
-      chef.log_level = :debug
+      chef.log_level = :info
       chef.json = {}
       chef.run_list = %w(
         recipe[apt]
         recipe[bjn_logstash]
-        recipe[bjn_logstash::test]
       )
     end
   end

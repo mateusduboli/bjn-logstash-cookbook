@@ -55,6 +55,8 @@ cookbook_file 'filter_seq.rb' do
   notifies :restart, 'service[logstash]', :delayed
 end
 
+bjn_logstash_conf 'base.conf.erb'
+
 runit_service 'logstash' do
   owner node['logstash']['user']
   group node['logstash']['user']
