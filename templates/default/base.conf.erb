@@ -1,31 +1,41 @@
 input {
 
-<%- node['logstash']['input'].each do |name, config| -%>
-  <%= name %> {<%- config.each do |k, v| -%>
-    <%= k %> => <%= quote_logstash v %><%- end -%>
+<% node['logstash']['input'].each do |type, inputs| %>
+<% inputs.each do |name, config| %>
+  <%= name %> {<% config.each do |k, v| %>
+    <%= k %> => <%= quote_logstash v %><% end %>
+    <% unless type.nil? %>type => <%= quote_logstash type %><% end %>
   }
 
-<%- end -%>
+<% end %><% end %>
 }
 
 
 filter {
 
-<%- node['logstash']['filter'].each do |name, config| -%>
-  <%= name %> {<%= "\n" if config.keys.empty? %><%- config.each do |k, v| -%>
-    <%= k %> => <%= quote_logstash v %><%- end -%>
-  }
+<% node['logstash']['filter'].each do |type, filters| %>
+  <% unless type.nil? %>if [type] == <%= quote_logstash type %> {<% end %>
 
-<%- end -%>
+  <% filters.each do |name, config| %>
+    <%= name %> {<%= "\n" if config.keys.empty? %><% config.each do |k, v| %>
+      <%= k %> => <%= quote_logstash v %><% end %>
+    }
+
+<% end %><% unless type.nil? %>  }
+<% end %><% end %>
 }
 
 
 output {
 
-<%- node['logstash']['output'].each do |name, config| -%>
-  <%= name %> {<%- config.each do |k, v| -%>
-    <%= k %> => <%= quote_logstash v %><%- end -%>
-  }
+<% node['logstash']['output'].each do |type, outputs| %>
+  <% unless type.nil? %>if [type] == <%= quote_logstash type %> {<% end %>
 
-<%- end -%>
+  <% outputs.each do |name, config| %>
+    <%= name %> {<% config.each do |k, v| %>
+      <%= k %> => <%= quote_logstash v %><% end %>
+    }
+
+<% end %><% unless type.nil? %>  }
+<% end %><% end %>
 }

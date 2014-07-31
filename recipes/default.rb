@@ -5,10 +5,6 @@
 # Copyright (C) 2014 Blue Jeans Network
 #
 
-include_recipe 'bjn_essentials'
-
-include_recipe 'bjn_java'
-
 include_recipe 'runit'
 
 group node['logstash']['user']
@@ -33,13 +29,6 @@ ark 'logstash' do
   home_dir node['logstash']['home']
   owner node['logstash']['user']
   group node['logstash']['user']
-  notifies :restart, 'service[logstash]', :delayed
-end
-
-cookbook_file 'multiply' do
-  path "#{node['logstash']['home']}/bin/multiply"
-  backup false
-  mode 0755
   notifies :restart, 'service[logstash]', :delayed
 end
 

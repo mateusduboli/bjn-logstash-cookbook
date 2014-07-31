@@ -15,7 +15,4 @@ export LS_HEAP_SIZE="<%= node['logstash']['heap_size'] %>"
 exec 2>&1
 cd $LOGSTASH_HOME # Necessary for logstash to work properly
 CMD="$LOGSTASH_HOME/bin/logstash $LOGSTASH_OPTS"
-exec chpst -u <%= node['logstash']['user'] %> \
-  $LOGSTASH_HOME/bin/multiply                 \
-    <%= node['logstash']['logs'] %> logstash  \
-    <%= node['logstash']['agents'] %> "$CMD" 2>&1
+exec chpst -u <%= node['logstash']['user'] %> $CMD

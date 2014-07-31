@@ -15,5 +15,6 @@ suites:
   - name: default
     run_list:
       - recipe[apt]
+      - recipe[bjn_java]
       - recipe[bjn_logstash]
     attributes: {}
