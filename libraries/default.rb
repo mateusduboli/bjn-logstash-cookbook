@@ -4,6 +4,12 @@ def quote_logstash o
     '[ %s ]' % o.map { |c| quote_logstash c }.join(', ')
   when /Regexp/
     o.to_s.inspect
+  when /Symbol/
+    o.to_s
+  when /TrueClass/
+    'true'
+  when /FalseClass/
+    'false'
   else
     o.inspect
   end

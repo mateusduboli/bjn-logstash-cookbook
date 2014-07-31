@@ -4,6 +4,11 @@
 Vagrant.configure('2') do |config|
   config.omnibus.chef_version = :latest
   config.berkshelf.enabled = true
+  config.vm.provider :virtualbox do |vb|
+    vb.customize [ 'modifyvm', :id, '--memory', 4096 ]
+    vb.customize [ 'modifyvm', :id, '--cpus', 4 ]
+    vb.customize [ 'modifyvm', :id, '--ioapic', 'on' ]
+  end
   config.vm.define 'vagrant' do |node|
     node.vm.box = 'chef/ubuntu-12.04'
     node.vm.hostname = 'vagrant'

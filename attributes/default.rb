@@ -15,11 +15,11 @@ default['logstash']['version'] = '1.4.2'
 
 # SHA-256 checksum for the bundled release
 default['logstash']['checksum'] = \
-  'd5be171af8d4ca966a0c731fc34f5deeee9d7631319e3660d1df99e43c5f8069'
+  'a29943d8d9ac36332614793430f5c238ddcd3b84b1b26251dab263dddbd26435'
 
-# Full URL (%-pattern-sensitive) for Logstash releases
+# Full URL for Logstash releases
 default['logstash']['url'] = \
-  'https://download.elasticsearch.org/logstash/logstash/logstash-%s.tar.gz' % \
+  'http://10.100.0.15/inf/logstash-%s.tar.gz' % \
     node['logstash']['version']
 
 # Enable debug logging (must be boolean)
@@ -34,65 +34,65 @@ default['logstash']['heap_size'] = '300m'
 
 
 
-# The next few attributes drive the Logstash configuration file. The native
+# The last few attributes drive the Logstash configuration file. The native
 # Ruby hashes are converted into Logstash format in a fairly straightforward
 # manner: Top-level hashes map an arbitrary "type" to an input, filter, or
 # output. Inputs are assigned the type, while filters and outputs use a
 # conditional to select the appropriate type. You can leave the type nil to
 # avoid generating all that. Array and Regex support would be nice.
 
-# Configure logstash inputs
 default['logstash']['input'] = {
-  'logstash' => {
-    'file' => {
-      'path'  => File.join(node['logstash']['logs'], 'logstash.log'),
-      'codec' => 'json'
-    }
-  }
-  # Looks something like this in the config:
+  # 'logstash' => {
+  #   'file' => {
+  #     'path'  => File.join(node['logstash']['logs'], 'logstash.log'),
+  #     'codec' => 'json'
+  #   }
+  # }
   #
-  #     file {
-  #       type => "logstash"
-  #       path => "/var/log/logstash.log"
-  #       codec => "json"
-  #     }
-  #
+  # # Looks something like this in the config:
+  # #
+  # #     file {
+  # #       type => "logstash"
+  # #       path => "/var/log/logstash.log"
+  # #       codec => "json"
+  # #     }
+  # #
 }
 
-# Configure logstash filters
 default['logstash']['filter'] = {
-  'logstash' => {
-    'seq' => {},
-    'scan' => {
-      'target' => 'digits',
-      'match' => [ 'message', /\b\d+\b/ ]
-    }
-  }
-  # Looks something like this in the config:
+  # 'logstash' => {
+  #   'seq' => {},
+  #   'scan' => {
+  #     'target' => 'digits',
+  #     'match' => [ 'message', /\b\d+\b/ ]
+  #   }
+  # }
   #
-  #     if [type] == "logstash" {
-  #       seq {}
-  #       scan {
-  #         target => "digits"
-  #         match => [ "message", "\\b\\d+\\b" ]
-  #       }
-  #     }
-  #
+  # # Looks something like this in the config:
+  # #
+  # #     if [type] == "logstash" {
+  # #       seq {}
+  # #       scan {
+  # #         target => "digits"
+  # #         match => [ "message", "\\b\\d+\\b" ]
+  # #       }
+  # #     }
+  # #
 }
 
-# Configure logstash outputs
 default['logstash']['output'] = {
-  'logstash' => {
-    'file' => {
-      'path' => File.join(node['logstash']['logs'], 'logstash.out')
-    }
-  }
-  # Looks something like this in the config:
+  # 'logstash' => {
+  #   'file' => {
+  #     'path' => File.join(node['logstash']['logs'], 'logstash.out')
+  #   }
+  # }
   #
-  #     if [type] == "logstash" {
-  #       file {
-  #         path => "/var/log/logstash.out"
-  #       }
-  #     }
-  #
+  # # Looks something like this in the config:
+  # #
+  # #     if [type] == "logstash" {
+  # #       file {
+  # #         path => "/var/log/logstash.out"
+  # #       }
+  # #     }
+  # #
 }
