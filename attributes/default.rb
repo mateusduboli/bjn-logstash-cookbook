@@ -42,21 +42,22 @@ default['logstash']['heap_size'] = '300m'
 # avoid generating all that. Array and Regex support would be nice.
 
 default['logstash']['input'] = {
-  # 'logstash' => {
-  #   'file' => {
-  #     'path'  => File.join(node['logstash']['logs'], 'logstash.log'),
-  #     'codec' => 'json'
-  #   }
-  # }
+  'logstash' => {
+    'file' => {
+      'stat_interval' => 60,
+      'path'  => File.join(node['logstash']['logs'], 'bogus.log'),
+      'codec' => 'json'
+    }
+  }
+
+  # Looks something like this in the config:
   #
-  # # Looks something like this in the config:
-  # #
-  # #     file {
-  # #       type => "logstash"
-  # #       path => "/var/log/logstash.log"
-  # #       codec => "json"
-  # #     }
-  # #
+  #     file {
+  #       type => "logstash"
+  #       path => "/var/log/logstash/*.log"
+  #       codec => "json"
+  #     }
+  #
 }
 
 default['logstash']['filter'] = {
@@ -81,18 +82,18 @@ default['logstash']['filter'] = {
 }
 
 default['logstash']['output'] = {
-  # 'logstash' => {
-  #   'file' => {
-  #     'path' => File.join(node['logstash']['logs'], 'logstash.out')
-  #   }
-  # }
+  'logstash' => {
+    'file' => {
+      'path' => '/dev/null'
+    }
+  }
+
+  # Looks something like this in the config:
   #
-  # # Looks something like this in the config:
-  # #
-  # #     if [type] == "logstash" {
-  # #       file {
-  # #         path => "/var/log/logstash.out"
-  # #       }
-  # #     }
-  # #
+  #     if [type] == "logstash" {
+  #       file {
+  #         path => "/dev/null"
+  #       }
+  #     }
+  #
 }

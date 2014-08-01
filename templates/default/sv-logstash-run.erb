@@ -1,4 +1,5 @@
 #!/bin/sh
+ulimit -n 65536
 export LOGSTASH_HOME="<%= node['logstash']['home'] %>" # Required for SinceDB
 export LOGSTASH_LOGS="<%= node['logstash']['logs'] %>"
 export LOGSTASH_OPTS="agent -f <%= node['logstash']['conf'] %>"
