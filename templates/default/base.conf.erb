@@ -4,7 +4,7 @@ input {
 <% inputs.each do |name, config| %>
   <%= name %> {<% config.each do |k, v| %>
     <%= k %> => <%= quote_logstash v %><% end %>
-    <% unless type.nil? %>type => <%= quote_logstash type %><% end %>
+    <% if type.is_a?(String) %>type => <%= quote_logstash type %><% end %>
   }
 
 <% end %><% end %>
