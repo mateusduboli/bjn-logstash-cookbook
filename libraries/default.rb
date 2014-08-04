@@ -3,7 +3,7 @@ def quote_logstash o
   when /Array/
     '[ %s ]' % o.map { |c| quote_logstash c }.join(', ')
   when /Regexp/
-    o.to_s.inspect
+    o.to_s
   when /Symbol/
     o.to_s
   when /TrueClass/
