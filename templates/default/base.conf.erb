@@ -14,14 +14,14 @@ input {
 filter {
 
 <% node['logstash']['filter'].each do |type, filters| %>
-  <% unless type.nil? %>if [type] == <%= quote_logstash type %> {<% end %>
+  <% if type.is_a?(String) %>if [type] == <%= quote_logstash type %> {<% end %>
 
   <% filters.each do |name, config| %>
     <%= name %> {<%= "\n" if config.keys.empty? %><% config.each do |k, v| %>
       <%= k %> => <%= quote_logstash v %><% end %>
     }
 
-<% end %><% unless type.nil? %>  }
+<% end %><% if type.is_a?(String) %>  }
 <% end %><% end %>
 }
 
@@ -29,13 +29,13 @@ filter {
 output {
 
 <% node['logstash']['output'].each do |type, outputs| %>
-  <% unless type.nil? %>if [type] == <%= quote_logstash type %> {<% end %>
+  <% if type.is_a?(String) %>if [type] == <%= quote_logstash type %> {<% end %>
 
   <% outputs.each do |name, config| %>
     <%= name %> {<% config.each do |k, v| %>
       <%= k %> => <%= quote_logstash v %><% end %>
     }
 
-<% end %><% unless type.nil? %>  }
+<% end %><% if type.is_a?(String) %>  }
 <% end %><% end %>
 }
