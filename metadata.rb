@@ -8,4 +8,4 @@ maintainer_email 'sclemmer@bluejeans.com'
 depends 'ark'
 depends 'runit'
 
-suggests 'java'
+suggests 'bjn_java'

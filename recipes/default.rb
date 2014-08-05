@@ -32,16 +32,12 @@ ark 'logstash' do
   notifies :restart, 'service[logstash]', :delayed
 end
 
-cookbook_file 'filter_scan.rb' do
-  path "#{node['logstash']['home']}/lib/logstash/filters/scan.rb"
-  backup false
-  notifies :restart, 'service[logstash]', :delayed
-end
-
-cookbook_file 'filter_seq.rb' do
-  path "#{node['logstash']['home']}/lib/logstash/filters/seq.rb"
-  backup false
-  notifies :restart, 'service[logstash]', :delayed
+%w[ scan seq enterprise_name ].each do |filter|
+  cookbook_file "filter_#{filter}.rb" do
+    path "#{node['logstash']['home']}/lib/logstash/filters/#{filter}.rb"
+    backup false
+    notifies :restart, 'service[logstash]', :delayed
+  end
 end
 
 bjn_logstash_conf 'base.conf.erb'
