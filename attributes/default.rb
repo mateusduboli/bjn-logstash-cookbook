@@ -15,7 +15,7 @@ default['logstash']['version'] = '1.4.2'
 
 # SHA-256 checksum for the bundled release
 default['logstash']['checksum'] = \
-  '528ee9c646741d2a8fea17831a26b9317582d1eded1c47096cfe24cae370f546'
+  '3cb786ee32cbbc133141924130e85831db92880a82a68158b1e66455a51be6d6'
 
 # Full URL for Logstash releases
 default['logstash']['url'] = \
