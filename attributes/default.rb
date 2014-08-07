@@ -1,28 +1,28 @@
-# User for Logstash directories, files, and services
-default['logstash']['user'] = 'logstash'
-
-# Directory to install the Logstash source
-default['logstash']['home'] = '/opt/logstash'
-
-# Directory to store the Logstash logs
-default['logstash']['logs'] = '/var/log/logstash'
-
-# Path to the Logstash configuration
-default['logstash']['conf'] = '/etc/logstash/logstash.conf'
-
 # Version of Logstash to install
 default['logstash']['version'] = '1.4.2'
 
-# SHA-256 checksum for the bundled release
+# SHA-256 checksum for the given version
 default['logstash']['checksum'] = \
   'b27c12ef625eaba7df040d065e2a985b4614f333bf045a3476c3d64776c1f70c'
 
-# Full URL for Logstash releases
+# URL pattern for Logstash releases
 default['logstash']['url'] = \
   'http://10.100.0.15/inf/logstash-%s.tar.gz' % \
     node['logstash']['version']
 
-# Enable debug logging (must be boolean)
+# User for Logstash assets and services
+default['logstash']['user'] = 'logstash'
+
+# Home for Logstash source
+default['logstash']['home'] = '/opt/logstash'
+
+# Home for Logstash logs
+default['logstash']['logs'] = '/var/log/logstash'
+
+# Path to Logstash configuration
+default['logstash']['conf'] = '/etc/logstash/logstash.conf'
+
+# Enable debug logging [boolean]
 default['logstash']['debug?'] = false
 
 # Number of concurrent Logstash filter workers
@@ -30,7 +30,7 @@ default['logstash']['debug?'] = false
 default['logstash']['workers'] = 1
 
 # Configure a default JVM heap size value
-default['logstash']['heap_size'] = '300m'
+default['logstash']['heap_size'] = '256m'
 
 
 

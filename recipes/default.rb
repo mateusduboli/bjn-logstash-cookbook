@@ -40,7 +40,17 @@ end
   end
 end
 
-bjn_logstash_conf 'base.conf.erb'
+directory ::File.dirname(node['logstash']['conf']) do
+  owner node['logstash']['user']
+  group node['logstash']['user']
+end
+
+template node['logstash']['conf'] do
+  source 'conf.erb'
+  owner node['logstash']['user']
+  group node['logstash']['user']
+  notifies :restart, 'runit_service[logstash]', :delayed
+end
 
 runit_service 'logstash' do
   owner node['logstash']['user']
