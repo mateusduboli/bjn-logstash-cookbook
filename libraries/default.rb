@@ -11,6 +11,6 @@ def quote_logstash o
   when /FalseClass/
     'false'
   else
-    o.inspect
+    o.inspect.gsub('\\\\', '\\')
   end
 end
