@@ -13,10 +13,10 @@ default['logstash']['url'] = \
 # User for Logstash assets and services
 default['logstash']['user'] = 'logstash'
 
-# Home for Logstash source
+# Home of Logstash source
 default['logstash']['home'] = '/opt/logstash'
 
-# Home for Logstash logs
+# Home of Logstash logs
 default['logstash']['logs'] = '/var/log/logstash'
 
 # Path to Logstash configuration
