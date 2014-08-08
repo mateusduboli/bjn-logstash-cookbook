@@ -5,6 +5,7 @@
 # Copyright (C) 2014 Blue Jeans Network
 #
 
+
 include_recipe 'runit'
 
 group node['logstash']['user']
