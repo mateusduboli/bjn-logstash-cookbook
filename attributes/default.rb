@@ -30,7 +30,7 @@ default['logstash']['debug?'] = false
 default['logstash']['workers'] = 1
 
 # Configure a default JVM heap size value
-default['logstash']['heap_size'] = '256m'
+default['logstash']['heap_size'] = '512m'
 
 
 
