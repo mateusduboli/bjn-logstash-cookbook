@@ -41,7 +41,7 @@ default['logstash']['heap_size'] = '512m'
 # conditional to select the appropriate type. You can leave the type nil to
 # avoid generating all that. Array and Regex support would be nice.
 
-default['logstash']['input'] = {
+default['logstash']['config']['input'] = {
   'logstash' => {
     'file' => {
       'stat_interval' => 60,
@@ -60,7 +60,7 @@ default['logstash']['input'] = {
   #
 }
 
-default['logstash']['filter'] = {
+default['logstash']['config']['filter'] = {
   # 'logstash' => {
   #   'seq' => {},
   #   'scan' => {
@@ -81,7 +81,7 @@ default['logstash']['filter'] = {
   # #
 }
 
-default['logstash']['output'] = {
+default['logstash']['config']['output'] = {
   'logstash' => {
     'file' => {
       'path' => '/dev/null'

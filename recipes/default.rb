@@ -45,8 +45,8 @@ directory ::File.dirname(node['logstash']['conf']) do
   group node['logstash']['user']
 end
 
-template node['logstash']['conf'] do
-  source 'conf.erb'
+file node['logstash']['conf'] do
+  content logstash_config(node['logstash']['config'])
   owner node['logstash']['user']
   group node['logstash']['user']
   notifies :restart, 'runit_service[logstash]', :delayed
