@@ -5,9 +5,9 @@ plugins.
 
 ## Requirements
 
-This cookbook depends on `ark` and `runit`, but a recent Java should be
-installed, thus we suggest the `bjn_java` cookbook. The following platforms are
-officially supported:
+This cookbook depends on `ark`, `runit`, and `bjn_helpers`, but a recent Java
+should be installed, thus we suggest the `bjn_java` cookbook. The following
+platforms are officially supported:
 
 * Ubuntu 12.04
 * Ubuntu 14.04
