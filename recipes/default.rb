@@ -5,7 +5,7 @@
 # Copyright (C) 2014 Blue Jeans Network
 #
 
-include_recipe 'bjn_helpers'
+node.default['logstash'] = materialize(node['logstash'])
 
 include_recipe 'runit'
 
