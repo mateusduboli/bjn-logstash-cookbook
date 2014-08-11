@@ -7,8 +7,7 @@ default['logstash']['checksum'] = \
 
 # URL pattern for Logstash releases
 default['logstash']['url'] = \
-  'http://10.100.0.15/inf/logstash-%s.tar.gz' % \
-    node['logstash']['version']
+  'http://10.100.0.15/inf/logstash-%{version}.tar.gz'
 
 # User for Logstash assets and services
 default['logstash']['user'] = 'logstash'
