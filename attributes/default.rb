@@ -40,59 +40,62 @@ default['logstash']['heap_size'] = '512m'
 # conditional to select the appropriate type. You can leave the type nil to
 # avoid generating all that. Array and Regex support would be nice.
 
-default['logstash']['config']['input'] = {
-  'logstash' => {
-    'file' => {
-      'stat_interval' => 60,
-      'path'  => File.join(node['logstash']['logs'], 'bogus.log'),
-      'codec' => 'json'
-    }
-  }
+# Commented out so you can include_recipe[bjn_logstash] multiple times without
+# blowing out other configs.
 
-  # Looks something like this in the config:
-  #
-  #     file {
-  #       type => "logstash"
-  #       path => "/var/log/logstash/*.log"
-  #       codec => "json"
-  #     }
-  #
-}
+# default['logstash']['config']['input'] = {
+#   # 'logstash' => {
+#   #   'file' => {
+#   #     'stat_interval' => 60,
+#   #     'path'  => File.join(node['logstash']['logs'], 'bogus.log'),
+#   #     'codec' => 'json'
+#   #   }
+#   # }
+#   #
+#   # # Looks something like this in the config:
+#   # #
+#   # #     file {
+#   # #       type => "logstash"
+#   # #       path => "/var/log/logstash/*.log"
+#   # #       codec => "json"
+#   # #     }
+#   # #
+# }
 
-default['logstash']['config']['filter'] = {
-  # 'logstash' => {
-  #   'seq' => {},
-  #   'scan' => {
-  #     'target' => 'digits',
-  #     'match' => [ 'message', /\b\d+\b/ ]
-  #   }
-  # }
-  #
-  # # Looks something like this in the config:
-  # #
-  # #     if [type] == "logstash" {
-  # #       seq {}
-  # #       scan {
-  # #         target => "digits"
-  # #         match => [ "message", "\\b\\d+\\b" ]
-  # #       }
-  # #     }
-  # #
-}
+# default['logstash']['config']['filter'] = {
+#   # 'logstash' => {
+#   #   'seq' => {},
+#   #   'scan' => {
+#   #     'target' => 'digits',
+#   #     'match' => [ 'message', /\b\d+\b/ ]
+#   #   }
+#   # }
+#   #
+#   # # Looks something like this in the config:
+#   # #
+#   # #     if [type] == "logstash" {
+#   # #       seq {}
+#   # #       scan {
+#   # #         target => "digits"
+#   # #         match => [ "message", "\\b\\d+\\b" ]
+#   # #       }
+#   # #     }
+#   # #
+# }
 
-default['logstash']['config']['output'] = {
-  'logstash' => {
-    'file' => {
-      'path' => '/dev/null'
-    }
-  }
-
-  # Looks something like this in the config:
-  #
-  #     if [type] == "logstash" {
-  #       file {
-  #         path => "/dev/null"
-  #       }
-  #     }
-  #
-}
+# default['logstash']['config']['output'] = {
+#   # 'logstash' => {
+#   #   'file' => {
+#   #     'path' => '/dev/null'
+#   #   }
+#   # }
+#   #
+#   # # Looks something like this in the config:
+#   # #
+#   # #     if [type] == "logstash" {
+#   # #       file {
+#   # #         path => "/dev/null"
+#   # #       }
+#   # #     }
+#   # #
+# }
