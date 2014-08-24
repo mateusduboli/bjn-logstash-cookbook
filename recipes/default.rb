@@ -7,17 +7,7 @@
 
 node.default['logstash'] = materialize(node['logstash'])
 
-include_recipe 'runit'
-
-group node['logstash']['user']
-
-user node['logstash']['user'] do
-  gid node['logstash']['user']
-  home node['logstash']['home']
-  comment 'logstash'
-  shell '/bin/false'
-  system true
-end
+include_recipe 'bjn_logstash::user'
 
 directory node['logstash']['logs'] do
   owner node['logstash']['user']
@@ -54,7 +44,4 @@ file node['logstash']['conf'] do
   notifies :restart, 'runit_service[logstash]', :delayed
 end
 
-runit_service 'logstash' do
-  owner node['logstash']['user']
-  group node['logstash']['user']
-end
+include_recipe 'bjn_logstash::service'

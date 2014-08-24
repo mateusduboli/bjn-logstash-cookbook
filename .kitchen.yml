@@ -17,4 +17,16 @@ suites:
       - recipe[apt]
       - recipe[bjn_java]
       - recipe[bjn_logstash]
-    attributes: {}
+    attributes:
+      logstash:
+        config:
+          input:
+            test:
+              file:
+                path: '/bogus.log'
+          filter:
+            test:
+              seq: {}
+          output:
+            test:
+              stdout: {}
