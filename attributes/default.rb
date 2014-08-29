@@ -1,9 +1,9 @@
 # Version of Logstash to install
-default['logstash']['version'] = '1.4.2'
+default['logstash']['version'] = '1.4.2.bjn4'
 
 # SHA-256 checksum for the given version
 default['logstash']['checksum'] = \
-  'b27c12ef625eaba7df040d065e2a985b4614f333bf045a3476c3d64776c1f70c'
+  'ce838bf52f51286c199b80e99eef7f61b3cf6d97c0f9bacac491b2ff74c5723f'
 
 # URL pattern for Logstash releases
 default['logstash']['url'] = \

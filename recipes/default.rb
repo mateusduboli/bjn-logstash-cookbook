@@ -24,14 +24,6 @@ ark 'logstash' do
   notifies :restart, 'service[logstash]', :delayed
 end
 
-%w[ scan seq enterprise_name ].each do |filter|
-  cookbook_file "filter_#{filter}.rb" do
-    path "#{node['logstash']['home']}/lib/logstash/filters/#{filter}.rb"
-    backup false
-    notifies :restart, 'service[logstash]', :delayed
-  end
-end
-
 directory ::File.dirname(node['logstash']['conf']) do
   owner node['logstash']['user']
   group node['logstash']['user']
