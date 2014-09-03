@@ -19,7 +19,7 @@ default['logstash']['home'] = '/opt/logstash'
 default['logstash']['logs'] = '/var/log/logstash'
 
 # Path to Logstash configuration
-default['logstash']['conf'] = '/etc/logstash/logstash.conf'
+default['logstash']['conf'] = '/etc/logstash'
 
 # Enable debug logging [boolean]
 default['logstash']['debug?'] = false
@@ -37,13 +37,11 @@ default['logstash']['heap_size'] = '512m'
 # Ruby hashes are converted into Logstash format in a fairly straightforward
 # manner: Top-level hashes map an arbitrary "type" to an input, filter, or
 # output. Inputs are assigned the type, while filters and outputs use a
-# conditional to select the appropriate type. You can leave the type nil to
-# avoid generating all that. Array and Regex support would be nice.
+# conditional to select the appropriate type. See the bjn_helpers cookbook for
+# more specifics. Commented out so you can include_recipe[bjn_logstash] multiple
+# times without accidentally blowing out other configs.
 
-# Commented out so you can include_recipe[bjn_logstash] multiple times without
-# blowing out other configs.
-
-# default['logstash']['config']['input'] = {
+# default['logstash']['config']['example']['input'] = {
 #   # 'logstash' => {
 #   #   'file' => {
 #   #     'stat_interval' => 60,
@@ -62,7 +60,7 @@ default['logstash']['heap_size'] = '512m'
 #   # #
 # }
 
-# default['logstash']['config']['filter'] = {
+# default['logstash']['config']['example']['filter'] = {
 #   # 'logstash' => {
 #   #   'seq' => {},
 #   #   'scan' => {
@@ -83,7 +81,7 @@ default['logstash']['heap_size'] = '512m'
 #   # #
 # }
 
-# default['logstash']['config']['output'] = {
+# default['logstash']['config']['example']['output'] = {
 #   # 'logstash' => {
 #   #   'file' => {
 #   #     'path' => '/dev/null'

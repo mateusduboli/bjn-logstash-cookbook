@@ -17,7 +17,31 @@ Vagrant.configure('2') do |config|
     node.vm.network :forwarded_port, guest: 9300, host: 9300
     node.vm.provision :chef_solo do |chef|
       chef.log_level = :info
-      chef.json = {}
+      chef.json = {
+        logstash: {
+          config: {
+            example: {
+              input: {
+                test: {
+                  file: {
+                    path: '/bogus.log'
+                  }
+                }
+              },
+              filter: {
+                test: {
+                  seq: {}
+                }
+              },
+              output: {
+                test: {
+                  stdout: {}
+                }
+              }
+            }
+          }
+        }
+      }
       chef.run_list = %w(
         recipe[apt]
         recipe[bjn_java]

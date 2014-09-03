@@ -5,8 +5,10 @@ export LOGSTASH_LOGS="<%= node['logstash']['logs'] %>"
 export LOGSTASH_OPTS="agent -f <%= node['logstash']['conf'] %>"
 export LOGSTASH_OPTS="$LOGSTASH_OPTS -l $LOGSTASH_LOGS/logstash.log"
 export LOGSTASH_OPTS="$LOGSTASH_OPTS -w <%= node['logstash']['workers'] %>"
-<% if node['logstash']['debug?'] %>
-export LOGSTASH_OPTS="$LOGSTASH_OPTS --debug --verbose"
+<% if node['logstash']['verbose?'] %>
+export LOGSTASH_OPTS="$LOGSTASH_OPTS --verbose"
+<% elsif node['logstash']['debug?'] %>
+export LOGSTASH_OPTS="$LOGSTASH_OPTS --debug"
 <% end %>
 export HOME="$LOGSTASH_HOME" # Again, for SinceDB
 export USE_JRUBY=1

@@ -20,13 +20,14 @@ suites:
     attributes:
       logstash:
         config:
-          input:
-            test:
-              file:
-                path: '/bogus.log'
-          filter:
-            test:
-              seq: {}
-          output:
-            test:
-              stdout: {}
+          test:
+            input:
+              test:
+                file:
+                  path: '/bogus.log'
+            filter:
+              test:
+                seq: {}
+            output:
+              test:
+                stdout: {}

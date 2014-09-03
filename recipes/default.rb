@@ -21,19 +21,33 @@ ark 'logstash' do
   home_dir node['logstash']['home']
   owner node['logstash']['user']
   group node['logstash']['user']
-  notifies :restart, 'service[logstash]', :delayed
 end
 
-directory ::File.dirname(node['logstash']['conf']) do
+directory node['logstash']['conf'] do
   owner node['logstash']['user']
   group node['logstash']['user']
 end
 
-file node['logstash']['conf'] do
-  content logstash_config(node['logstash']['config'])
-  owner node['logstash']['user']
-  group node['logstash']['user']
-  notifies :restart, 'runit_service[logstash]', :delayed
-end
+include_recipe 'runit'
 
-include_recipe 'bjn_logstash::service'
+node['logstash']['config'].each do |name, config|
+  service = "logstash-#{name}"
+  path = File.join node['logstash']['conf'], "#{name}.conf"
+
+  file path do
+    content logstash_config(config)
+    owner node['logstash']['user']
+    group node['logstash']['user']
+  end
+
+  runit_service service do
+    template_name 'logstash'
+    run_template_name 'logstash'
+    log_template_name 'logstash'
+    check_script_template_name 'logstash'
+    finish_script_template_name 'logstash'
+    restart_on_update false
+    owner node['logstash']['user']
+    group node['logstash']['user']
+  end
+end
