@@ -49,5 +49,8 @@ node['logstash']['config'].each do |name, config|
     restart_on_update false
     owner node['logstash']['user']
     group node['logstash']['user']
+    options \
+      config: path,
+      log: "#{node['logstash']['logs']}/logstash-#{name}.log"
   end
 end

@@ -1,9 +1,8 @@
 #!/bin/sh
 ulimit -n 65536
 export LOGSTASH_HOME="<%= node['logstash']['home'] %>" # Required for SinceDB
-export LOGSTASH_LOGS="<%= node['logstash']['logs'] %>"
-export LOGSTASH_OPTS="agent -f <%= node['logstash']['conf'] %>"
-export LOGSTASH_OPTS="$LOGSTASH_OPTS -l $LOGSTASH_LOGS/logstash.log"
+export LOGSTASH_OPTS="agent -f <%= @options[:config] %>"
+export LOGSTASH_OPTS="$LOGSTASH_OPTS -l <%= @options[:log] %>"
 export LOGSTASH_OPTS="$LOGSTASH_OPTS -w <%= node['logstash']['workers'] %>"
 <% if node['logstash']['verbose?'] %>
 export LOGSTASH_OPTS="$LOGSTASH_OPTS --verbose"
