@@ -3,7 +3,7 @@ default['logstash']['version'] = '1.4.2'
 
 # SHA-256 checksum for the given version
 default['logstash']['checksum'] = \
-  'b024681b10bc213e5f12cf9a4a064fb444682f749abf2721b8630acc3b5ce844'
+  'abb0549554209d1e473b0d4abae86850c020d942f160b384dd79fd994e780d1d'
 
 # URL pattern for Logstash releases
 default['logstash']['url'] = \
