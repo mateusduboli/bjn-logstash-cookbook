@@ -1,4 +1,9 @@
 ---
+use_cachier_plugin: true
+provisioner:
+  name: chef_solo
+  cookbook_files_glob: "**/*"
+
 driver_plugin: vagrant
 driver_config:
   require_chef_omnibus: true

@@ -38,6 +38,7 @@ node['logstash']['config'].each do |name, config|
     content logstash_config(config)
     owner node['logstash']['user']
     group node['logstash']['user']
+    notifies :restart, "runit_service[#{service}]", :delayed
   end
 
   runit_service service do
