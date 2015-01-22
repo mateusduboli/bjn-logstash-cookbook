@@ -5,7 +5,7 @@ plugins.
 
 ## Requirements
 
-This cookbook depends on `ark`, `runit`, and `bjn_helpers`, but a recent Java
+This cookbook depends only on `ark`, `runit`, and `magic`, but a recent Java
 should be installed, thus we suggest the `bjn_java` cookbook. The following
 platforms are officially supported:
 
@@ -19,4 +19,5 @@ special attention to the configuration file specification.
 
 ## Recipes
 
-This cookbook contains only one recipe, `default`, which manages Logstash.
+This cookbook contains two recipes, `default`, which manages Logstash, and
+`user`, which can be used to create the Logstash user separately.

@@ -7,6 +7,6 @@ maintainer_email 'sclemmer@bluejeans.com'
 
 depends 'ark'
 depends 'runit'
-depends 'bjn_helpers'
+depends 'magic'
 
 suggests 'bjn_java'
