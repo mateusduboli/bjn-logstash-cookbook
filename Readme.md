@@ -1,4 +1,4 @@
-# bjn_logstash
+# bjn_logstash  ![Version](https://img.shields.io/cookbook/v/bjn_logstash.svg?style=flat-square)
 
 Installs and configures [Logstash](http://logstash.net) with some additional
 plugins.
