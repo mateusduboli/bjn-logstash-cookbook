@@ -4,6 +4,7 @@ description      'Install and configure Logstash'
 long_description 'Install and configure Logstash'
 maintainer       'Sean Clemmer / Blue Jeans Network'
 maintainer_email 'sclemmer@bluejeans.com'
+license          'ISC'
 
 depends 'ark'
 depends 'runit'
