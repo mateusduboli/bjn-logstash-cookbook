@@ -8,6 +8,6 @@ license          'ISC'
 
 depends 'ark'
 depends 'runit'
-depends 'magic'
+depends 'magic', '>= v1.2'
 
 suggests 'bjn_java'
