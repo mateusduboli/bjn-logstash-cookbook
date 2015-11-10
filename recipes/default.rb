@@ -35,7 +35,7 @@ node['logstash']['config'].each do |name, config|
   path = File.join node['logstash']['conf'], "#{name}.conf"
 
   file path do
-    content logstash_config(config)
+    content logstash_typed_config(config)
     owner node['logstash']['user']
     group node['logstash']['user']
     notifies :restart, "runit_service[#{service}]", :delayed
